@@ -7,17 +7,18 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: test
+      run: ./test.py
 
+  rundb:
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: make
-      run: make
-    - name: install python2
-      run: sudo apt install -y python2
-    - name: test
-      run: python2 test.py
+      run: make -j4
     - name: rundb
       run: ./rundb
